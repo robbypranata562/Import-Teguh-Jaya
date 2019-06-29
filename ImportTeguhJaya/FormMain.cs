@@ -7,14 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using LinqToExcel;
 namespace ImportTeguhJaya
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
+        }
+
+        private void importDataBarangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImportBarang importBarang = new ImportBarang();
+            importBarang.ShowDialog();
+
         }
     }
 }

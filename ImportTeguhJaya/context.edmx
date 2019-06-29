@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="grosirModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id_admin" />
+          </Key>
+          <Property Name="id_admin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_karyawan" Type="int" Nullable="false" />
+          <Property Name="uname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="pass" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="level" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="barang">
+          <Key>
+            <PropertyRef Name="id_gudang" />
+          </Key>
+          <Property Name="id_gudang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nama" Type="text" Nullable="false" />
+          <Property Name="jenis" Type="text" Nullable="false" />
+          <Property Name="suplier" Type="text" Nullable="false" />
+          <Property Name="modal" Type="int" Nullable="false" />
+          <Property Name="harga_atas" Type="int" Nullable="false" />
+          <Property Name="harga_bawah" Type="int" Nullable="false" />
+          <Property Name="jumlah" Type="int" Nullable="false" />
+          <Property Name="sisa" Type="int" Nullable="false" />
+          <Property Name="tangal_masuk" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="barang_terjual">
+          <Key>
+            <PropertyRef Name="id_terjual" />
+          </Key>
+          <Property Name="id_terjual" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_barangtoko" Type="int" Nullable="false" />
+          <Property Name="jual_idpelanggan" Type="int" Nullable="false" />
+          <Property Name="jual_hargaakhir" Type="int" Nullable="false" />
+          <Property Name="jual_jumlah" Type="int" Nullable="false" />
+          <Property Name="tanggal" Type="date" Nullable="false" />
+          <Property Name="id_transaksi" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="his_login">
+          <Key>
+            <PropertyRef Name="id_login" />
+          </Key>
+          <Property Name="id_login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_karyawan" Type="int" Nullable="false" />
+          <Property Name="uname" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="level" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="tanggal" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamaBarang" Type="varchar" MaxLength="255" />
+          <Property Name="JenisBarang" Type="varchar" MaxLength="255" />
+          <Property Name="SupplierBarang" Type="varchar" MaxLength="255" />
+          <Property Name="Modal" Type="double" />
+          <Property Name="HargaAtas" Type="double" />
+          <Property Name="HargaBawah" Type="double" />
+          <Property Name="JumlahDus" Type="int" />
+          <Property Name="SatuanKonversi" Type="int" />
+          <Property Name="Stok" Type="int" />
+          <Property Name="MinStock" Type="int" />
+          <Property Name="UmurBarangMaksimal" Type="int" />
+          <Property Name="UmurBarangNormal" Type="int" />
+          <Property Name="TanggalMasuk" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="karyawan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nama" Type="text" Nullable="false" />
+          <Property Name="jekel" Type="text" Nullable="false" />
+          <Property Name="jabatan" Type="text" Nullable="false" />
+          <Property Name="alamat" Type="text" Nullable="false" />
+          <Property Name="foto" Type="text" Nullable="false" />
+          <Property Name="ktp" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="nohp" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="hutang" Type="int" Nullable="false" />
+          <Property Name="tgl_gaji" Type="date" Nullable="false" />
+          <Property Name="jum_gaji" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="keranjang">
+          <Key>
+            <PropertyRef Name="id_keranjang" />
+          </Key>
+          <Property Name="id_keranjang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_barangtoko" Type="int" Nullable="false" />
+          <Property Name="id_pelanggan" Type="int" Nullable="false" />
+          <Property Name="jumlah_keranjang" Type="int" Nullable="false" />
+          <Property Name="harga_akhir" Type="int" Nullable="false" />
+          <Property Name="sub_total" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="sub_totaldiskon" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="total_hargadiskon" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_sesion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="tanggal" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notif">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jum_minimal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pelanggan">
+          <Key>
+            <PropertyRef Name="id_pelanggan" />
+          </Key>
+          <Property Name="id_pelanggan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nama_pelanggan" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="hutang" Type="int" Nullable="false" />
+          <Property Name="alamat" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nohp" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tanggal" Type="date" Nullable="false" />
+          <Property Name="saldo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="return_barang">
+          <Key>
+            <PropertyRef Name="id_return" />
+          </Key>
+          <Property Name="id_return" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pelanggan" Type="int" Nullable="false" />
+          <Property Name="id_barangtoko" Type="int" Nullable="false" />
+          <Property Name="jumlah_barang" Type="int" Nullable="false" />
+          <Property Name="harga" Type="int" Nullable="false" />
+          <Property Name="tanggal" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="id_sesion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="harga_return" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stok_toko">
+          <Key>
+            <PropertyRef Name="id_toko" />
+          </Key>
+          <Property Name="id_toko" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_gudang" Type="int" Nullable="false" />
+          <Property Name="nama_toko" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="jenis_toko" Type="text" Nullable="false" />
+          <Property Name="suplier_toko" Type="text" Nullable="false" />
+          <Property Name="modal_toko" Type="int" Nullable="false" />
+          <Property Name="harga_atas_toko" Type="int" Nullable="false" />
+          <Property Name="harga_bawah_toko" Type="int" Nullable="false" />
+          <Property Name="jumlah_toko" Type="int" Nullable="false" />
+          <Property Name="sisa_toko" Type="int" Nullable="false" />
+          <Property Name="tanggal_masuktoko" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="suplier">
+          <Key>
+            <PropertyRef Name="id_suplier" />
+          </Key>
+          <Property Name="id_suplier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nama_suplier" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="bank" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="no_rekening" Type="int" Nullable="false" />
+          <Property Name="hutang" Type="int" Nullable="false" />
+          <Property Name="tempo" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transaksi">
+          <Key>
+            <PropertyRef Name="id_transaksi" />
+          </Key>
+          <Property Name="id_transaksi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pelanggan" Type="int" Nullable="false" />
+          <Property Name="tot_belanja" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="jumlah_bayar" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="kembalian" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tgl_transaksi" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="faktur" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="hutang_pertgl" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="grosirModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="barang" EntityType="Self.barang" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="barang_terjual" EntityType="Self.barang_terjual" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="his_login" EntityType="Self.his_login" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="item" EntityType="Self.item" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="karyawan" EntityType="Self.karyawan" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="keranjang" EntityType="Self.keranjang" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="notif" EntityType="Self.notif" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="pelanggan" EntityType="Self.pelanggan" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="return_barang" EntityType="Self.return_barang" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="stok_toko" EntityType="Self.stok_toko" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="suplier" EntityType="Self.suplier" Schema="grosir" store:Type="Tables" />
+          <EntitySet Name="transaksi" EntityType="Self.transaksi" Schema="grosir" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="grosirModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id_admin" />
+          </Key>
+          <Property Name="id_admin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_karyawan" Type="Int32" Nullable="false" />
+          <Property Name="uname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="level" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="barang">
+          <Key>
+            <PropertyRef Name="id_gudang" />
+          </Key>
+          <Property Name="id_gudang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nama" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jenis" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="suplier" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modal" Type="Int32" Nullable="false" />
+          <Property Name="harga_atas" Type="Int32" Nullable="false" />
+          <Property Name="harga_bawah" Type="Int32" Nullable="false" />
+          <Property Name="jumlah" Type="Int32" Nullable="false" />
+          <Property Name="sisa" Type="Int32" Nullable="false" />
+          <Property Name="tangal_masuk" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="barang_terjual">
+          <Key>
+            <PropertyRef Name="id_terjual" />
+          </Key>
+          <Property Name="id_terjual" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_barangtoko" Type="Int32" Nullable="false" />
+          <Property Name="jual_idpelanggan" Type="Int32" Nullable="false" />
+          <Property Name="jual_hargaakhir" Type="Int32" Nullable="false" />
+          <Property Name="jual_jumlah" Type="Int32" Nullable="false" />
+          <Property Name="tanggal" Type="DateTime" Nullable="false" />
+          <Property Name="id_transaksi" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="his_login">
+          <Key>
+            <PropertyRef Name="id_login" />
+          </Key>
+          <Property Name="id_login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_karyawan" Type="Int32" Nullable="false" />
+          <Property Name="uname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="level" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tanggal" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="karyawan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nama" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jekel" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jabatan" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="alamat" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="foto" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ktp" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nohp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hutang" Type="Int32" Nullable="false" />
+          <Property Name="tgl_gaji" Type="DateTime" Nullable="false" />
+          <Property Name="jum_gaji" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="keranjang">
+          <Key>
+            <PropertyRef Name="id_keranjang" />
+          </Key>
+          <Property Name="id_keranjang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_barangtoko" Type="Int32" Nullable="false" />
+          <Property Name="id_pelanggan" Type="Int32" Nullable="false" />
+          <Property Name="jumlah_keranjang" Type="Int32" Nullable="false" />
+          <Property Name="harga_akhir" Type="Int32" Nullable="false" />
+          <Property Name="sub_total" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sub_totaldiskon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="total_hargadiskon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_sesion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tanggal" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notif">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jum_minimal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pelanggan">
+          <Key>
+            <PropertyRef Name="id_pelanggan" />
+          </Key>
+          <Property Name="id_pelanggan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nama_pelanggan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hutang" Type="Int32" Nullable="false" />
+          <Property Name="alamat" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nohp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tanggal" Type="DateTime" Nullable="false" />
+          <Property Name="saldo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="return_barang">
+          <Key>
+            <PropertyRef Name="id_return" />
+          </Key>
+          <Property Name="id_return" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pelanggan" Type="Int32" Nullable="false" />
+          <Property Name="id_barangtoko" Type="Int32" Nullable="false" />
+          <Property Name="jumlah_barang" Type="Int32" Nullable="false" />
+          <Property Name="harga" Type="Int32" Nullable="false" />
+          <Property Name="tanggal" Type="DateTime" Nullable="false" />
+          <Property Name="id_sesion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="harga_return" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stok_toko">
+          <Key>
+            <PropertyRef Name="id_toko" />
+          </Key>
+          <Property Name="id_toko" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_gudang" Type="Int32" Nullable="false" />
+          <Property Name="nama_toko" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jenis_toko" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="suplier_toko" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modal_toko" Type="Int32" Nullable="false" />
+          <Property Name="harga_atas_toko" Type="Int32" Nullable="false" />
+          <Property Name="harga_bawah_toko" Type="Int32" Nullable="false" />
+          <Property Name="jumlah_toko" Type="Int32" Nullable="false" />
+          <Property Name="sisa_toko" Type="Int32" Nullable="false" />
+          <Property Name="tanggal_masuktoko" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="suplier">
+          <Key>
+            <PropertyRef Name="id_suplier" />
+          </Key>
+          <Property Name="id_suplier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nama_suplier" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="no_rekening" Type="Int32" Nullable="false" />
+          <Property Name="hutang" Type="Int32" Nullable="false" />
+          <Property Name="tempo" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transaksi">
+          <Key>
+            <PropertyRef Name="id_transaksi" />
+          </Key>
+          <Property Name="id_transaksi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pelanggan" Type="Int32" Nullable="false" />
+          <Property Name="tot_belanja" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jumlah_bayar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kembalian" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tgl_transaksi" Type="DateTime" Nullable="false" />
+          <Property Name="faktur" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hutang_pertgl" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="grosirEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="barangs" EntityType="Self.barang" />
+          <EntitySet Name="barang_terjual" EntityType="Self.barang_terjual" />
+          <EntitySet Name="his_login" EntityType="Self.his_login" />
+          <EntitySet Name="karyawans" EntityType="Self.karyawan" />
+          <EntitySet Name="keranjangs" EntityType="Self.keranjang" />
+          <EntitySet Name="notifs" EntityType="Self.notif" />
+          <EntitySet Name="pelanggans" EntityType="Self.pelanggan" />
+          <EntitySet Name="return_barang" EntityType="Self.return_barang" />
+          <EntitySet Name="stok_toko" EntityType="Self.stok_toko" />
+          <EntitySet Name="supliers" EntityType="Self.suplier" />
+          <EntitySet Name="transaksis" EntityType="Self.transaksi" />
+          <EntitySet Name="items" EntityType="grosirModel.item" />
+        </EntityContainer>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamaBarang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="JenisBarang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierBarang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Modal" Type="Double" />
+          <Property Name="HargaAtas" Type="Double" />
+          <Property Name="HargaBawah" Type="Double" />
+          <Property Name="JumlahDus" Type="Int32" />
+          <Property Name="SatuanKonversi" Type="Int32" />
+          <Property Name="Stok" Type="Int32" />
+          <Property Name="MinStock" Type="Int32" />
+          <Property Name="UmurBarangMaksimal" Type="Int32" />
+          <Property Name="UmurBarangNormal" Type="Int32" />
+          <Property Name="TanggalMasuk" Type="DateTime" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="grosirModelStoreContainer" CdmEntityContainer="grosirEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="grosirModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="id_admin" ColumnName="id_admin" />
+                <ScalarProperty Name="id_karyawan" ColumnName="id_karyawan" />
+                <ScalarProperty Name="uname" ColumnName="uname" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="level" ColumnName="level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="barangs">
+            <EntityTypeMapping TypeName="grosirModel.barang">
+              <MappingFragment StoreEntitySet="barang">
+                <ScalarProperty Name="id_gudang" ColumnName="id_gudang" />
+                <ScalarProperty Name="nama" ColumnName="nama" />
+                <ScalarProperty Name="jenis" ColumnName="jenis" />
+                <ScalarProperty Name="suplier" ColumnName="suplier" />
+                <ScalarProperty Name="modal" ColumnName="modal" />
+                <ScalarProperty Name="harga_atas" ColumnName="harga_atas" />
+                <ScalarProperty Name="harga_bawah" ColumnName="harga_bawah" />
+                <ScalarProperty Name="jumlah" ColumnName="jumlah" />
+                <ScalarProperty Name="sisa" ColumnName="sisa" />
+                <ScalarProperty Name="tangal_masuk" ColumnName="tangal_masuk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="barang_terjual">
+            <EntityTypeMapping TypeName="grosirModel.barang_terjual">
+              <MappingFragment StoreEntitySet="barang_terjual">
+                <ScalarProperty Name="id_terjual" ColumnName="id_terjual" />
+                <ScalarProperty Name="id_barangtoko" ColumnName="id_barangtoko" />
+                <ScalarProperty Name="jual_idpelanggan" ColumnName="jual_idpelanggan" />
+                <ScalarProperty Name="jual_hargaakhir" ColumnName="jual_hargaakhir" />
+                <ScalarProperty Name="jual_jumlah" ColumnName="jual_jumlah" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="id_transaksi" ColumnName="id_transaksi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="his_login">
+            <EntityTypeMapping TypeName="grosirModel.his_login">
+              <MappingFragment StoreEntitySet="his_login">
+                <ScalarProperty Name="id_login" ColumnName="id_login" />
+                <ScalarProperty Name="id_karyawan" ColumnName="id_karyawan" />
+                <ScalarProperty Name="uname" ColumnName="uname" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="karyawans">
+            <EntityTypeMapping TypeName="grosirModel.karyawan">
+              <MappingFragment StoreEntitySet="karyawan">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nama" ColumnName="nama" />
+                <ScalarProperty Name="jekel" ColumnName="jekel" />
+                <ScalarProperty Name="jabatan" ColumnName="jabatan" />
+                <ScalarProperty Name="alamat" ColumnName="alamat" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="ktp" ColumnName="ktp" />
+                <ScalarProperty Name="nohp" ColumnName="nohp" />
+                <ScalarProperty Name="hutang" ColumnName="hutang" />
+                <ScalarProperty Name="tgl_gaji" ColumnName="tgl_gaji" />
+                <ScalarProperty Name="jum_gaji" ColumnName="jum_gaji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="keranjangs">
+            <EntityTypeMapping TypeName="grosirModel.keranjang">
+              <MappingFragment StoreEntitySet="keranjang">
+                <ScalarProperty Name="id_keranjang" ColumnName="id_keranjang" />
+                <ScalarProperty Name="id_barangtoko" ColumnName="id_barangtoko" />
+                <ScalarProperty Name="id_pelanggan" ColumnName="id_pelanggan" />
+                <ScalarProperty Name="jumlah_keranjang" ColumnName="jumlah_keranjang" />
+                <ScalarProperty Name="harga_akhir" ColumnName="harga_akhir" />
+                <ScalarProperty Name="sub_total" ColumnName="sub_total" />
+                <ScalarProperty Name="sub_totaldiskon" ColumnName="sub_totaldiskon" />
+                <ScalarProperty Name="total_hargadiskon" ColumnName="total_hargadiskon" />
+                <ScalarProperty Name="id_sesion" ColumnName="id_sesion" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notifs">
+            <EntityTypeMapping TypeName="grosirModel.notif">
+              <MappingFragment StoreEntitySet="notif">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="jum_minimal" ColumnName="jum_minimal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pelanggans">
+            <EntityTypeMapping TypeName="grosirModel.pelanggan">
+              <MappingFragment StoreEntitySet="pelanggan">
+                <ScalarProperty Name="id_pelanggan" ColumnName="id_pelanggan" />
+                <ScalarProperty Name="nama_pelanggan" ColumnName="nama_pelanggan" />
+                <ScalarProperty Name="hutang" ColumnName="hutang" />
+                <ScalarProperty Name="alamat" ColumnName="alamat" />
+                <ScalarProperty Name="nohp" ColumnName="nohp" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="return_barang">
+            <EntityTypeMapping TypeName="grosirModel.return_barang">
+              <MappingFragment StoreEntitySet="return_barang">
+                <ScalarProperty Name="id_return" ColumnName="id_return" />
+                <ScalarProperty Name="id_pelanggan" ColumnName="id_pelanggan" />
+                <ScalarProperty Name="id_barangtoko" ColumnName="id_barangtoko" />
+                <ScalarProperty Name="jumlah_barang" ColumnName="jumlah_barang" />
+                <ScalarProperty Name="harga" ColumnName="harga" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="id_sesion" ColumnName="id_sesion" />
+                <ScalarProperty Name="harga_return" ColumnName="harga_return" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stok_toko">
+            <EntityTypeMapping TypeName="grosirModel.stok_toko">
+              <MappingFragment StoreEntitySet="stok_toko">
+                <ScalarProperty Name="id_toko" ColumnName="id_toko" />
+                <ScalarProperty Name="id_gudang" ColumnName="id_gudang" />
+                <ScalarProperty Name="nama_toko" ColumnName="nama_toko" />
+                <ScalarProperty Name="jenis_toko" ColumnName="jenis_toko" />
+                <ScalarProperty Name="suplier_toko" ColumnName="suplier_toko" />
+                <ScalarProperty Name="modal_toko" ColumnName="modal_toko" />
+                <ScalarProperty Name="harga_atas_toko" ColumnName="harga_atas_toko" />
+                <ScalarProperty Name="harga_bawah_toko" ColumnName="harga_bawah_toko" />
+                <ScalarProperty Name="jumlah_toko" ColumnName="jumlah_toko" />
+                <ScalarProperty Name="sisa_toko" ColumnName="sisa_toko" />
+                <ScalarProperty Name="tanggal_masuktoko" ColumnName="tanggal_masuktoko" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supliers">
+            <EntityTypeMapping TypeName="grosirModel.suplier">
+              <MappingFragment StoreEntitySet="suplier">
+                <ScalarProperty Name="id_suplier" ColumnName="id_suplier" />
+                <ScalarProperty Name="nama_suplier" ColumnName="nama_suplier" />
+                <ScalarProperty Name="bank" ColumnName="bank" />
+                <ScalarProperty Name="no_rekening" ColumnName="no_rekening" />
+                <ScalarProperty Name="hutang" ColumnName="hutang" />
+                <ScalarProperty Name="tempo" ColumnName="tempo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transaksis">
+            <EntityTypeMapping TypeName="grosirModel.transaksi">
+              <MappingFragment StoreEntitySet="transaksi">
+                <ScalarProperty Name="id_transaksi" ColumnName="id_transaksi" />
+                <ScalarProperty Name="id_pelanggan" ColumnName="id_pelanggan" />
+                <ScalarProperty Name="tot_belanja" ColumnName="tot_belanja" />
+                <ScalarProperty Name="jumlah_bayar" ColumnName="jumlah_bayar" />
+                <ScalarProperty Name="kembalian" ColumnName="kembalian" />
+                <ScalarProperty Name="tgl_transaksi" ColumnName="tgl_transaksi" />
+                <ScalarProperty Name="faktur" ColumnName="faktur" />
+                <ScalarProperty Name="hutang_pertgl" ColumnName="hutang_pertgl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="items">
+            <EntityTypeMapping TypeName="grosirModel.item">
+              <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="TanggalMasuk" ColumnName="TanggalMasuk" />
+                <ScalarProperty Name="UmurBarangNormal" ColumnName="UmurBarangNormal" />
+                <ScalarProperty Name="UmurBarangMaksimal" ColumnName="UmurBarangMaksimal" />
+                <ScalarProperty Name="MinStock" ColumnName="MinStock" />
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="SatuanKonversi" ColumnName="SatuanKonversi" />
+                <ScalarProperty Name="JumlahDus" ColumnName="JumlahDus" />
+                <ScalarProperty Name="HargaBawah" ColumnName="HargaBawah" />
+                <ScalarProperty Name="HargaAtas" ColumnName="HargaAtas" />
+                <ScalarProperty Name="Modal" ColumnName="Modal" />
+                <ScalarProperty Name="SupplierBarang" ColumnName="SupplierBarang" />
+                <ScalarProperty Name="JenisBarang" ColumnName="JenisBarang" />
+                <ScalarProperty Name="NamaBarang" ColumnName="NamaBarang" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
